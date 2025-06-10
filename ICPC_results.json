@@ -1,0 +1,74 @@
+[
+  {
+    "Model": "Gemini-2.5-Pro-03-25",
+    "Pass@1": 0.17397260273972606,
+    "Pass@5": 0.2945205479452055,
+    "URL": "https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-5-pro"
+  },
+  {
+    "Model": "Claude-3.7-Sonnet-Thinking",
+    "Pass@1": 0.042465753424657526,
+    "Pass@5": 0.0821917808219178,
+    "URL": "https://www.anthropic.com/news/claude-3-7-sonnet"
+  },
+  {
+    "Model": "Gpt-4o-2024-05-13",
+    "Pass@1": 0.019863013698630135,
+    "Pass@5": 0.03351272015655577,
+    "URL": "https://platform.openai.com/docs/models/gpt-4o"
+  },
+  {
+    "Model": "Chatgpt-4o-Latest",
+    "Pass@1": 0.019178082191780823,
+    "Pass@5": 0.03606762339639052,
+    "URL": "https://platform.openai.com/docs/models/gpt-4o"
+  },
+  {
+    "Model": "Claude-3.7-Sonnet",
+    "Pass@1": 0.03835616438356164,
+    "Pass@5": 0.06414437921287236,
+    "URL": "https://www.anthropic.com/news/claude-3-7-sonnet"
+  },
+  {
+    "Model": "O1-Mini",
+    "Pass@1": 0.1054794520547945,
+    "Pass@5": 0.19863013698630136,
+    "URL": "https://openai.com/index/openai-o1-mini-advancing-cost-efficient-reasoning/"
+  },
+  {
+    "Model": "O3-Mini(High)",
+    "Pass@1": 0.13424657534246576,
+    "Pass@5": 0.2945205479452055,
+    "URL": "https://platform.openai.com/docs/models/o3-mini"
+  },
+  {
+    "Model": "Claude-3.5-Sonnet",
+    "Pass@1": 0.0273972602739726,
+    "Pass@5": 0.05044574907588606,
+    "URL": "https://www.anthropic.com/news/claude-3-5-sonnet"
+  },
+  {
+    "Model": "Gpt-4o-Mini",
+    "Pass@1": 0.00958904109589041,
+    "Pass@5": 0.02989780387040661,
+    "URL": "https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/"
+  },
+  {
+    "Model": "DeepSeek-V3-03-24",
+    "Pass@1": 0.06164383561643837,
+    "Pass@5": 0.12078712763644271,
+    "URL": "https://api-docs.deepseek.com/news/news250325"
+  },
+  {
+    "Model": "O4-Mini(High)",
+    "Pass@1": 0.25205479452054785,
+    "Pass@5": 0.4383561643835616,
+    "URL": "https://platform.openai.com/docs/models/o4-mini"
+  },
+  {
+    "Model": "DeepSeek-R1-01-20",
+    "Pass@1": 0.08082191780821917,
+    "Pass@5": 0.14383561643835616,
+    "URL": "https://api-docs.deepseek.com/news/news250120"
+  }
+]

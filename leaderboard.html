@@ -1,620 +1,344 @@
 <!doctype html>
-<html>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;400&display=swap" rel="stylesheet" />
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Humanity's Last Code Exam</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <title>Humanity's Last Code Exam</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
+    <!-- ======== Fonts & Icons ======== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;400&display=swap" rel="stylesheet" />
+    <link rel="icon" href="figs/edited_1747725897.png" />
 
-  <link rel="icon" href="https://images.emojiterra.com/google/noto-emoji/unicode-15/color/1024px/1f9d1-1f4bb.png" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" />
+    <!-- ======== Libraries ======== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@v1.x/themes/prism.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@v1.x/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@v1.x/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs-bibtex@2.1.0/prism-bibtex.min.js"></script>
 
-  <link href="https://cdn.jsdelivr.net/npm/prismjs@v1.x/themes/prism.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@v1.x/components/prism-core.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@v1.x/plugins/autoloader/prism-autoloader.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs-bibtex@2.1.0/prism-bibtex.min.js"></script>
-
-
-  <style>
-    body {
-      font-family: "JetBrains Mono", monospace;
-      background-color: #ffffff;
-      color: #000000;
-    }
-
-    #content {
-      width: 75%;
-    }
-
-    th,
-    td {
-      text-align: left;
-    }
-
-    th {
-      background-color: #f2f2f2;
-    }
-
-    #notes {
-      font-size: 1em;
-    }
-
-    #notes h3 {
-      margin-top: 1em;
-      font-size: 2em;
-      text-align: center;
-    }
-
-    #notes li {
-      font-size: 1.2em;
-      font-weight: 300;
-      margin: 1em;
-    }
-
-    .form-select {
-      font-size: 1em;
-    }
-
-    @media screen and (max-width: 1400px) {
+    <!-- ======== Styles ======== -->
+    <style>
       body {
-        font-size: 1.6vw;
+        font-family: "JetBrains Mono", monospace;
+        background-color: #ffffff;
+        color: #000000;
       }
-
       #content {
-        width: 100%;
+        width: 50%;
       }
-
-      h1 {
+      th,
+      td {
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+        cursor: pointer;
+        user-select: none;
+        font-weight: 800;
+        font-size: 1.1em;
+      }
+      tbody tr {
+        transition: background-color 0.2s ease;
+      }
+      tbody tr:hover {
+        background-color: #e9f6ff;
+      }
+      #notes {
+        font-size: 1.1em;
+      }
+      #notes h3 {
+        margin-top: 2em;
+        margin-bottom: 1em;
         font-size: 2em;
+        text-align: center;
       }
-
-      h2 {
-        font-size: 1.6em;
-      }
-
-      h3 {
+      #notes li {
         font-size: 1.2em;
+        font-weight: 300;
+        margin: 1em;
       }
-
-      table {
-        font-size: small;
+      .form-select {
+        font-size: 1em;
       }
-    }
-  </style>
-</head>
-
-<body>
-  <div id="content" class="container-fluid d-flex flex-column align-items-center gap-3">
-    <h1 class="text-nowrap mt-5">🏆 Humanity's Last Code Exam 🏆</h1>
-    <h3 class="fw-light text-nowrap">
-      <small id="warning">Can Advanced LLMs Conquer Human's Hardest Code Competition?<br /></small>
-    </h3>
-    <p>📢25-Jun-1: We are excited to release HLCE, Checkout <a href="">🌏github</a> and <a href="">🤗Huggingface</a>!</p>
-    <div class="d-flex flex-row justify-content-center gap-3">
-      <a href="https://github.com/Humanity-s-Last-Code-Exam/HLCE"><img
-          src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"
-          alt="github" class="img-fluid" /></a>
-      <a href=""><img
-          src="https://img.shields.io/badge/Paper-ArXiv'35-a55fed.svg?style=for-the-badge" alt="paper"
-          class="img-fluid" /></a>
-    </div>
-
-    <div class="btn-group" role="group" id="Benchmark">
-      <input type="radio" class="btn-check" name="btnradio" id="IOI" checked />
-      <label class="btn btn-outline-primary" for="IOI">IOI</label>
-      <input type="radio" class="btn-check" name="btnradio" id="ICPC" />
-      <label class="btn btn-outline-primary" for="ICPC">ICPC</label>
-    </div>
-    <div id="chart" style="width: 100%; height: 600px"></div>
-    <div class="container-fluid d-flex flex-row flex-nowrap">
-      <div class="container-fluid d-flex flex-column align-items-center">
-        <label for="plused" class="text-success mb-3">⚡EvalPlus Tests⚡</label>
-        <table id="plused"
-          class="table table-responsive table-striped table-bordered flex-shrink-1 border border-success border-3">
-        </table>
-      </div>
-      <div class="container-fluid d-flex flex-column align-items-center">
-        <label for="origin" class="text-danger mb-3">Base Tests</label>
-        <table id="origin"
-          class="table table-responsive table-striped table-bordered flex-shrink-1 border border-danger border-3">
-        </table>
-      </div>
-    </div>
-    <div id="notes">
-      <h3>📝 Notes</h3>
-      <div class="inline-block mt-3">
-        <ol>
-          <li>
-            Evaluated using
-            <a href="https://github.com/evalplus/humanevalplus_release">HumanEval+</a>
-            version 0.1.10;
-            <a href="https://github.com/evalplus/mbppplus_release">MBPP+</a>
-            version 0.2.0.
-          </li>
-          <li>
-            Models are ranked according to pass@1 using greedy decoding. Setup
-            details can be found
-            <a href="https://github.com/evalplus/evalplus/blob/master/codegen/model.py">here</a>.
-          </li>
-          <li>
-            ✨ marks models evaluated using a chat setting, while others
-            perform direct code completion.
-          </li>
-          <li>
-            Both MBPP and MBPP+ referred in our leaderboard use a subset (399
-            tasks) of hand-verified problems from MBPP-sanitized (427 tasks),
-            to make sure the programming task is well-formed (e.g., test_list
-            is not wrong).
-          </li>
-          <li>
-            Model providers have the responsibility to avoid data
-            contamination. Models trained on close data can be affected by
-            contamination.
-          </li>
-          <li>
-            💚 means open weights and open data. 💙 means open weights and
-            open SFT data, but the base model is not data-open. What does this
-            imply? 💚💙 models open-source the data such that one can
-            concretely reason about contamination.
-          </li>
-          <li>
-            "Size" here is the amount of activated model weight during
-            inference.
-          </li>
-        </ol>
-      </div>
-    </div>
-    <div id="notes">
-      <h3>🤗 More Leaderboards</h3>
-      In addition to EvalPlus leaderboards, it is recommended to
-      comprehensively understand LLM coding ability through a diverse set of
-      benchmarks and leaderboards, such as:
-      <div class="inline-block mt-3">
-        <ol>
-          <li>
-            <a href="https://bigcode-bench.github.io/">BigCodeBench</a>
-          </li>
-          <li>
-            <a href="https://huggingface.co/spaces/bigcode/bigcode-models-leaderboard">Big Code Models Leaderboard</a>
-          </li>
-          <li>
-            <a href="https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard">Chatbot Arena Leaderboard</a>
-          </li>
-          <li>
-            <a href="https://github.com/amazon-science/cceval">CrossCodeEval</a>
-          </li>
-          <li>
-            <a href="https://fudanselab-classeval.github.io/">ClassEval</a>
-          </li>
-          <li>
-            <a href="https://crux-eval.github.io/leaderboard.html">CRUXEval</a>
-          </li>
-          <li>
-            <a href="https://codetlingua.github.io/leaderboard.html">Code Lingua</a>
-          </li>
-          <li><a href="https://evo-eval.github.io/">Evo-Eval</a></li>
-          <li><a href="https://huggingface.co/spaces/EffiBench/effibench-leaderboard">EffiBench</a></li>
-          <li>
-            <a href="https://github.com/01-ai/HumanEval.jl">HumanEval.jl - Julia version HumanEval with EvalPlus test
-              cases</a>
-          </li>
-          <li>
-            <a href="https://livecodebench.github.io/leaderboard.html">LiveCodeBench</a>
-          </li>
-          <li>
-            <a href="https://sparksofagi.github.io/MHPP/">MHPP</a>
-          </li>
-          <li>
-            <a href="https://github.com/THUDM/NaturalCodeBench">NaturalCodeBench</a>
-          </li>
-          <li><a href="https://github.com/Leolty/repobench">RepoBench</a></li>
-          <li><a href="https://www.swebench.com/">SWE-bench</a></li>
-          <li>
-            <a href="https://leaderboard.tabbyml.com/">TabbyML Leaderboard</a>
-          </li>
-          <li>
-            <a href="https://llm4softwaretesting.github.io/">TestEval</a>
-          </li>
-        </ol>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const originTable = document.getElementById("origin");
-    const plusedTable = document.getElementById("plused");
-    const benchmarkRadio = document.getElementById("Benchmark");
-    const chartDom = document.getElementById("chart");
-    var chart = echarts.init(chartDom);
-
-    const dataUrl = "results.json";
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "results.json", false); // false makes the request synchronous
-    xhr.send();
-
-    const calcAverage = (a, b) => {
-      if (a == null || b == null) {
-        return null;
-      } else {
-        return parseFloat(((parseFloat(a) + parseFloat(b)) / 2).toFixed(1));
+      @media screen and (max-width: 1400px) {
+        body {
+          font-size: 1.6vw;
+        }
+        #content {
+          width: 100%;
+        }
+        h1 {
+          font-size: 2em;
+        }
+        h2 {
+          font-size: 1.6em;
+        }
+        h3 {
+          font-size: 1.2em;
+        }
+        table {
+          font-size: small;
+        }
       }
-    };
+    </style>
+  </head>
 
-    var data;
-    /*
-    After calculating the average, the data should be like this:
-    data[Model]["pass@1"] = {
-      "humaneval": ...,
-      "mbpp": ...,
-      "humaneval+": ...,
-      "mbpp+": ...,
-      "average": ...,
-      "average+": ...,
-    }
-  */
-    if (xhr.status === 200) {
-      data = JSON.parse(xhr.responseText);
-      Object.keys(data).forEach((key) => {
-        data[key]["pass@1"]["average"] = calcAverage(
-          data[key]["pass@1"]["humaneval"],
-          data[key]["pass@1"]["mbpp"],
-        );
-        data[key]["pass@1"]["average+"] = calcAverage(
-          data[key]["pass@1"]["humaneval+"],
-          data[key]["pass@1"]["mbpp+"],
-        );
-      });
-      data = Object.keys(data).map((key) => {
-        return {
-          Model: key,
-          ...data[key],
-        };
-      });
-    } else {
-      // pop up error window
-      alert("Failed to load data from results.json");
-    }
-    const globalData = data;
+  <body>
+    <div id="content" class="container-fluid d-flex flex-column align-items-center gap-3 py-5 mt-3">
+      <h1 class="d-flex align-items-center gap-2 flex-wrap justify-content-center">
+        <img src="figs/edited_1747725897.png" alt="HLCE Logo" style="height:40px;" />
+        <span>HLCE: Humanity's Last Code Exam</span>
+      </h1>
 
-    const clearTable = () => {
-      originTable.innerHTML = "";
-      plusedTable.innerHTML = "";
-    };
+      <h3 class="fw-light text-nowrap">
+        <small id="warning">Can Advanced LLMs Conquer Human's Hardest Code Competition?<br /></small>
+      </h3>
 
-    const clearChart = () => {
-      chartOption.xAxis.data = [];
-      chartOption.series[0].data = [];
-      chartOption.series[1].data = [];
-      chartOption.series[0].markLine.data = [];
-      chartOption.series[1].markLine.data = [];
-    };
+      <div class="d-flex flex-row justify-content-center gap-3">
+        <a href="https://github.com/Humanity-s-Last-Code-Exam/HLCE">
+          <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="github" class="img-fluid" />
+        </a>
+        <a href="">
+          <img src="https://img.shields.io/badge/Paper-ArXiv'25-a55fed.svg?style=for-the-badge" alt="paper" class="img-fluid" />
+        </a>
+      </div>
 
-    var chartOption = {
-      legend: {
-        data: ["pass@1*"],
-      },
-      grid: {
-        left: "1%",
-        right: "4%",
-        bottom: "3%",
-        containLabel: true,
-      },
-      xAxis: {
-        name: "Act. Size",
-        type: "category",
-        boundaryGap: false,
-        data: [],
-        axisLabel: {
-          formatter: function (value) {
-            return value + "B";
-          },
-        },
-      },
-      yAxis: {
-        name: "PASS@1 (greedy decoding)",
-        type: "value",
-        show: true,
-        nameTextStyle: {
-          align: "left",
-        },
-        splitLine: {
-          show: true,
-          lineStyle: {
-            type: "dashed",
-          },
-        },
-      },
-      legend: {
-        data: ["base", "instructed"],
-        itemStyle: {
-          opacity: 1.0,
-        },
-      },
-      tooltip: {
-        trigger: "item",
-        axisPointer: {
-          type: "cross",
-        },
-      },
-      series: [
-        {
-          name: "base",
-          type: "scatter",
-          data: [],
-          itemStyle: {
-            color: "#91cc75",
-            opacity: 0.2,
-          },
-          emphasis: {
-            focus: "series",
-          },
-          lineStyle: {
-            width: 2,
-          },
-          markLine: {
-            symbol: "none",
-            emphasis: {
-              label: {
-                position: "middle",
-                formatter: function (params) {
-                  return params.data.name;
-                },
-              },
-            },
-            data: [],
-          },
-        },
-        {
-          name: "instructed",
-          type: "scatter",
-          data: [],
-          itemStyle: {
-            color: "#5470c6",
-            opacity: 0.2,
-          },
-          emphasis: {
-            focus: "series",
-          },
-          lineStyle: {
-            width: 2,
-          },
-          markLine: {
-            symbol: "none",
-            emphasis: {
-              label: {
-                position: "middle",
-                formatter: function (params) {
-                  return params.data.name;
-                },
-              },
-            },
-            data: [],
-          },
-        },
-      ],
-    };
+      <div id="notes">
+        <h3> News </h3>
+        <div class="inline-block mt-3">
+          <p>📢 25‑Jun‑1: We are excited to release HLCE. Checkout <a href="https://github.com/Humanity-s-Last-Code-Exam/HLCE">🌏 GitHub</a> and <a href="">🤗 HuggingFace</a>!</p>
+        </div>
 
-    const theaders = ["Model", "pass@1"];
+        <h3> Introduction </h3>
+        <div id="notes">
+          HLCE is a challenging benchmark of 235 competitive programming problems sourced from the IOI and ICPC World Finals. It features both standard and interactive problems, along with a novel self‑assessment task designed to evaluate deeper reasoning capabilities.
+          By incorporating data from human competitions, HLCE provides metrics that directly compare large language models with elite human programmers—revealing a clear gap in performance. The benchmark is designed to push the boundaries of code generation, encouraging progress toward models that can truly compete at the highest levels of programming expertise.
+          <div style="text-align: center;">
+            <img src="figs/hlce_cover.png" alt="Cover" style="width: 90%; max-width: 100%; height: auto;" />
+          </div>
+        </div>
+      </div>
 
-    // score: 'average', 'humaneval', 'mbpp', 'humaneval+', 'mbpp+'
-    const displayTable = (table, score) => {
-      // filter out Null
-      data = globalData
-        .filter((row) => {
-          return row["pass@1"][score] != null;
-        })
-        .sort((a, b) => {
-          return b["pass@1"][score] - a["pass@1"][score];
+      <!-- ======== Benchmark Switch ======== -->
+      <div id="notes">
+      <h3> LeaderBoard</h3>
+      <div class="btn-group my-3" role="group" id="benchmark-toggle">
+        <input type="radio" class="btn-check" name="benchmark" id="ICPC" autocomplete="off" checked />
+        <label class="btn btn-outline-primary" for="ICPC">ICPC</label>
+
+        <input type="radio" class="btn-check" name="benchmark" id="IOI" autocomplete="off" />
+        <label class="btn btn-outline-primary" for="IOI">IOI</label>
+
+        <input type="radio" class="btn-check" name="benchmark" id="Average" autocomplete="off" />
+        <label class="btn btn-outline-primary" for="Average">Average</label>
+      </div>
+        </div>
+
+      <!-- ======== Results Table ======== -->
+      <div class="table-responsive w-100">
+        <table id="results-table" class="table table-striped table-bordered align-middle"></table>
+      </div>
+
+            <!-- ======== Benchmark Switch ======== -->
+      <div id="notes">
+      <h3> Submitting Custom Models</h3>
+        To submit models you can create a pull request on our <a href="https://github.com/Humanity-s-Last-Code-Exam/results"> Results</a> . Particularly, you can copy your model generations folder from `output` to the `submissions` folder and create a pull request. We will review the submission and add the model to the leaderboard accordingly.
+
+      </div>
+
+      <div id="notes" class="w-100 mt-5">
+        <h3 class="text-center">Citation</h3>
+        <p>If you use <strong>HLCE</strong> in your research, please cite our paper:</p>
+        <pre class="mx-auto p-3 bg-light rounded" style="max-width: 700px;"><code class="language-bibtex">@article{hlce2025,
+  title   = {Humanity's Last Code Exam: Can Advanced LLMs Conquer Human's Hardest Code Competition?},
+  author  = {First Last and Second Author and Third Author},
+  journal = {arXiv preprint arXiv:2506.01234},
+  year    = {2025}
+}</code></pre>
+      </div>
+    </div>
+
+    </div>
+
+    <!-- ====================================================== -->
+    <!-- ======== Script ====================================== -->
+    <!-- ====================================================== -->
+    <script>
+      ////////////////////////////////////////////////////////////////////////
+      //  GLOBAL STATE                                                      //
+      ////////////////////////////////////////////////////////////////////////
+      let tableData = [];
+      let tableKeys = [];
+      const sortState = new Map();
+
+      ////////////////////////////////////////////////////////////////////////
+      //  TABLE HELPERS                                                     //
+      ////////////////////////////////////////////////////////////////////////
+      const buildHeader = (keys) => {
+        const thead = document.createElement('thead');
+        const tr = document.createElement('tr');
+        const rankTh = document.createElement('th');
+        rankTh.textContent = '#';
+        tr.appendChild(rankTh);
+        keys.forEach((k) => {
+          const th = document.createElement('th');
+          th.dataset.key = k;
+          th.addEventListener('click', handleSortClick);
+          updateSortIndicator(th, k);
+          tr.appendChild(th);
         });
-      var thead = document.createElement("thead");
-      var headerRow = document.createElement("tr");
-      // add rank
-      var th = document.createElement("th");
-      th.textContent = "#";
-      headerRow.appendChild(th);
-      // headers
-      theaders.forEach(function (header) {
-        var th = document.createElement("th");
-        th.textContent = header;
-        headerRow.appendChild(th);
-      });
-      thead.appendChild(headerRow);
-      table.appendChild(thead);
+        thead.appendChild(tr);
+        return thead;
+      };
 
-      var tbody = document.createElement("tbody");
-      // add rank
-      var rank = 1;
-      data.forEach((row) => {
-        var dataRow = document.createElement("tr");
-        var rankCell = document.createElement("td");
-        rankCell.textContent = rank;
-        dataRow.appendChild(rankCell);
-        var modelCell = document.createElement("td");
-        if (rank == 1) {
-          modelCell.textContent = "🥇 ";
-        } else if (rank == 2) {
-          modelCell.textContent = "🥈 ";
-        } else if (rank == 3) {
-          modelCell.textContent = "🥉 ";
-        } else {
-          modelCell.textContent = "";
-        }
-        rank++;
-        var modelLink = document.createElement("a");
-        modelLink.href = row["link"];
-        modelLink.textContent = row["Model"];
-        modelLink.classList.add("link-underline-primary");
-        modelLink.classList.add("text-nowrap");
-        modelCell.appendChild(modelLink);
-        modelCell.classList.add("d-flex");
-        modelCell.classList.add("flex-nowrap");
-        var prompted = row["prompted"];
-        var opendata = row["open-data"];
-        if (prompted) {
-          // add a symbol to indicate the model is prompted
-          var promptedSymbol = document.createElement("span");
-          promptedSymbol.textContent = "✨";
-          modelCell.appendChild(promptedSymbol);
-        }
-        if (opendata.toUpperCase() == "FULL") {
-          // add a symbol to indicate the model is fully open-sourced
-          var promptedSymbol = document.createElement("span");
-          promptedSymbol.textContent = "💚";
-          modelCell.appendChild(promptedSymbol);
-        } else if (opendata.toUpperCase() == "PARTIAL") {
-          // add a symbol to indicate the model is partially open-sourced
-          // i.e., a subset of the model implementation is close-sourced
-          var promptedSymbol = document.createElement("span");
-          promptedSymbol.textContent = "💙";
-          modelCell.appendChild(promptedSymbol);
-        }
-        dataRow.appendChild(modelCell);
-        var passCell = document.createElement("td");
-        if (table == originTable) {
-          passCell.classList.add("text-danger");
-        } else if (table == plusedTable) {
-          passCell.textContent = "⚡";
-          passCell.classList.add("text-success");
-        }
-        passCell.textContent += row["pass@1"][score];
-        dataRow.appendChild(passCell);
-        tbody.appendChild(dataRow);
-      });
-      table.appendChild(tbody);
-    };
+      const updateSortIndicator = (th, key) => {
+        const dir = sortState.get(key);
+        const arrow = dir === 'asc' ? ' ▲' : dir === 'desc' ? ' ▼' : '';
+        th.textContent = key + arrow;
+      };
 
-    const displayChart = (score) => {
-      const maxMarkLineModels = 8;
-      // sort first
-      const data = globalData
-        .filter((model) => {
-          return model["pass@1"][score] != null;
-        })
-        .sort((a, b) => {
-          return b["pass@1"][score] - a["pass@1"][score];
-        });
-
-      const sizeList = [
-        ...new Set(
-          data
-            .filter((model) => model["size"] != null)
-            .map((model) => Math.round(model["size"])),
-        ),
-      ].sort((a, b) => {
-        return a - b;
-      });
-
-      chartOption.xAxis.data = sizeList;
-      chartOption.yAxis.max =
-        1 + Math.max(...data.map((model) => model["pass@1"][score]));
-
-      const nonPromptedModels = data.filter(
-        (model) => model["prompted"] == false && model["size"] != null,
-      );
-      const promptedModels = data.filter(
-        (model) => model["prompted"] == true && model["size"] != null,
-      );
-      const nonSizeModels = data.filter(
-        model => model.size === null
-      ).slice(0, maxMarkLineModels);
-
-      nonSizeModels.forEach((model) => {
-        chartOption.series[1].markLine.data.push({
-          name: model["Model"],
-          yAxis: model["pass@1"][score],
-        });
-      });
-
-      [nonPromptedModels, promptedModels].forEach((series, idx) => {
-        series.forEach((model) => {
-          chartOption.series[idx].data.push({
-            name: model["Model"],
-            value: [`${Math.round(model["size"])}`, model["pass@1"][score]],
+      const buildBody = (rows, keys) => {
+        const tbody = document.createElement('tbody');
+        rows.forEach((row, idx) => {
+          const tr = document.createElement('tr');
+          const rankTd = document.createElement('td');
+          rankTd.textContent = idx + 1;
+          tr.appendChild(rankTd);
+          keys.forEach((k) => {
+            const td = document.createElement('td');
+            if (k === 'Model' && row.URL) {
+              td.innerHTML = `<a href="${row.URL}" target="_blank" rel="noopener noreferrer">${row[k]}</a>`;
+            } else {
+              const v = row[k];
+              td.textContent = typeof v === 'number' && !Number.isNaN(v) ? v.toFixed(3) : v;
+            }
+            tr.appendChild(td);
           });
+          tbody.appendChild(tr);
         });
+        return tbody;
+      };
+
+      const renderTable = () => {
+        const table = document.getElementById('results-table');
+        table.innerHTML = '';
+        table.appendChild(buildHeader(tableKeys));
+        table.appendChild(buildBody(tableData, tableKeys));
+      };
+
+      ////////////////////////////////////////////////////////////////////////
+      //  SORTING                                                          //
+      ////////////////////////////////////////////////////////////////////////
+      const handleSortClick = (e) => {
+        const key = e.currentTarget.dataset.key;
+        const current = sortState.get(key);
+        const dir = current === 'asc' ? 'desc' : current === 'desc' ? undefined : 'asc';
+        if (dir) sortState.set(key, dir); else sortState.delete(key);
+        tableData.sort((a, b) => compareValues(a[key], b[key], dir));
+        [...sortState.keys()].forEach((k) => { if (k !== key) sortState.delete(k); });
+        renderTable();
+      };
+
+      const compareValues = (a, b, dir = 'asc') => {
+        const m = dir === 'desc' ? -1 : 1;
+        const aNum = !Number.isNaN(parseFloat(a));
+        const bNum = !Number.isNaN(parseFloat(b));
+        if (aNum && bNum) return (parseFloat(a) - parseFloat(b)) * m;
+        return String(a).localeCompare(String(b)) * m;
+      };
+
+      ////////////////////////////////////////////////////////////////////////
+      //  DATA LOADING                                                     //
+      ////////////////////////////////////////////////////////////////////////
+      const safeNum = (x) => {
+        const n = parseFloat(x);
+        return Number.isFinite(n) ? n : 0;
+      };
+
+      const loadAndRender = async (filename) => {
+        try {
+          const resp = await fetch(filename);
+          if (!resp.ok) throw new Error(`${filename} load failed`);
+          const json = await resp.json();
+          tableKeys = Object.keys(json[0]).filter((k) => k !== 'URL');
+          json.sort((a, b) => safeNum(b['pass@1']) - safeNum(a['pass@1']));
+          tableData = json;
+          sortState.clear();
+          renderTable();
+        } catch (err) {
+          alert(err.message);
+        }
+      };
+
+      const loadAverageAndRender = async () => {
+        try {
+          const [icpcResp, ioiResp] = await Promise.all([
+            fetch('ICPC_results.json'),
+            fetch('IOI_results.json')
+          ]);
+          if (!icpcResp.ok || !ioiResp.ok) throw new Error('Failed to load results');
+          const [icpcData, ioiData] = await Promise.all([
+            icpcResp.json(),
+            ioiResp.json(),
+          ]);
+
+          const aggMap = new Map();
+          const pass1Candidates = ['pass@1', 'pass1', 'pass@1 (%)'];
+          const pass5Candidates = ['pass@5', 'pass5', 'pass@5 (%)'];
+
+          const accumulate = (rows) => {
+            rows.forEach((row) => {
+              const name = row.Model;
+              if (!aggMap.has(name)) {
+                aggMap.set(name, { Model: name, URL: row.URL || '', p1: 0, p5: 0, cnt: 0 });
+              }
+              const entry = aggMap.get(name);
+              const p1 = pass1Candidates.map((k) => row[k]).find((v) => v !== undefined);
+              const p5 = pass5Candidates.map((k) => row[k]).find((v) => v !== undefined);
+              entry.p1 += safeNum(p1);
+              entry.p5 += safeNum(p5);
+              entry.cnt += 1;
+            });
+          };
+
+          accumulate(icpcData);
+          accumulate(ioiData);
+
+          const avgRows = Array.from(aggMap.values()).map((e) => ({
+            Model: e.Model,
+            'Pass@1': e.cnt ? e.p1 / e.cnt : 0,
+            'Pass@5': e.cnt ? e.p5 / e.cnt : 0,
+            URL: e.URL,
+          }));
+
+          avgRows.sort((a, b) => safeNum(b['pass@1']) - safeNum(a['pass@1']));
+          tableKeys = ['Model', 'Pass@1', 'Pass@5'];
+          tableData = avgRows;
+          sortState.clear();
+          renderTable();
+        } catch (err) {
+          alert(err.message);
+        }
+      };
+
+      ////////////////////////////////////////////////////////////////////////
+      //  EVENT LISTENERS                                                  //
+      ////////////////////////////////////////////////////////////////////////
+      document.getElementById('ICPC').addEventListener('change', (e) => {
+        if (e.target.checked) loadAndRender('ICPC_results.json');
+      });
+      document.getElementById('IOI').addEventListener('change', (e) => {
+        if (e.target.checked) loadAndRender('IOI_results.json');
+      });
+      document.getElementById('Average').addEventListener('change', (e) => {
+        if (e.target.checked) loadAverageAndRender();
       });
 
-      const offsets = [[50, 0]]
-        .concat(Array.from({ length: sizeList.length - 2 }, () => [0, 0]))
-        .concat([[-50, 0]]);
-      sizeList.forEach((size, idx) => {
-        const bestNonPromptedModel = nonPromptedModels
-          .filter((model) => Math.round(model["size"]) == size)
-          .sort((a, b) => {
-            return b["pass@1"][score] - a["pass@1"][score];
-          })[0];
-        const bestPromptedModel = promptedModels
-          .filter((model) => Math.round(model["size"]) == size)
-          .sort((a, b) => {
-            return b["pass@1"][score] - a["pass@1"][score];
-          })[0];
-        const hightLightBest = (series, model) => {
-          const point = chartOption.series[series].data.find(
-            (point) => point.name == model["Model"],
-          );
-          point.itemStyle = {
-            opacity: 1.0,
-          };
-          point.label = {
-            show: true,
-            position: "top",
-            offset: offsets[idx],
-            formatter: function (params) {
-              return params.data.name;
-            },
-            color: "inherit",
-          };
-        };
-        if (bestNonPromptedModel) {
-          hightLightBest(0, bestNonPromptedModel);
-        }
-        if (bestPromptedModel) {
-          hightLightBest(1, bestPromptedModel);
-        }
-      });
-
-      chart.setOption(chartOption);
-    };
-
-    const avergeRadio = document.getElementById("Average");
-    const humanEvalRadio = document.getElementById("HumanEval");
-    const mbppRadio = document.getElementById("MBPP");
-
-    humanEvalRadio.addEventListener("click", function () {
-      clearTable();
-      displayTable(originTable, "humaneval");
-      displayTable(plusedTable, "humaneval+");
-      clearChart();
-      displayChart("humaneval+");
-    });
-
-    mbppRadio.addEventListener("click", function () {
-      clearTable();
-      displayTable(originTable, "mbpp");
-      displayTable(plusedTable, "mbpp+");
-      clearChart();
-      displayChart("mbpp+");
-    });
-
-    avergeRadio.addEventListener("click", function () {
-      clearTable();
-      displayTable(originTable, "average");
-      displayTable(plusedTable, "average+");
-      clearChart();
-      displayChart("average");
-    });
-
-    humanEvalRadio.click();
-
-    window.addEventListener("resize", () => {
-      this.chart.resize();
-    });
-  </script>
-</body>
-
+      // initial load
+      loadAndRender('ICPC_results.json');
+    </script>
+  </body>
 </html>

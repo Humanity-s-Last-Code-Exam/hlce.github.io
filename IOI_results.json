@@ -1,0 +1,86 @@
+[
+  {
+    "Model": "Gemini-2.5-Pro-03-25",
+    "Pass@1": 0.05393258426966292,
+    "Pass@5": 0.11235955056179775,
+    "Average Points": 15.223019475655425,
+    "URL": "https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-5-pro"
+  },
+  {
+    "Model": "Claude-3.7-Sonnet-Thinking",
+    "Pass@1": 0.0,
+    "Pass@5": 0.0,
+    "Average Points": 3.0786516853932584,
+    "URL": "https://www.anthropic.com/news/claude-3-7-sonnet"
+  },
+  {
+    "Model": "Gpt-4o-2024-05-13",
+    "Pass@1": 0.004494382022471909,
+    "Pass@5": 0.011235955056179775,
+    "Average Points": 3.38876404494382,
+    "URL": "https://platform.openai.com/docs/models/gpt-4o"
+  },
+  {
+    "Model": "Chatgpt-4o-Latest",
+    "Pass@1": 0.004494382022471909,
+    "Pass@5": 0.011235955056179775,
+    "Average Points": 3.38876404494382,
+    "URL": "https://platform.openai.com/docs/models/gpt-4o"
+  },
+  {
+    "Model": "Claude-3.7-Sonnet",
+    "Pass@1": 0.011235955056179775,
+    "Pass@5": 0.011235955056179775,
+    "Average Points": 4.470056179775281,
+    "URL": "https://www.anthropic.com/news/claude-3-7-sonnet"
+  },
+  {
+    "Model": "O1-Mini",
+    "Pass@1": 0.013483146067415727,
+    "Pass@5": 0.033707865168539325,
+    "Average Points": 4.225842696629213,
+    "URL": "https://openai.com/index/openai-o1-mini-advancing-cost-efficient-reasoning/"
+  },
+  {
+    "Model": "O3-Mini(High)",
+    "Pass@1": 0.07272727272727274,
+    "Pass@5": 0.10227272727272728,
+    "Average Points": 10.833955303030303,
+    "URL": "https://platform.openai.com/docs/models/o3-mini"
+  },
+  {
+    "Model": "Claude-3.5-Sonnet",
+    "Pass@1": 0.006741573033707865,
+    "Pass@5": 0.011235955056179775,
+    "Average Points": 3.5213483146067412,
+    "URL": "https://www.anthropic.com/news/claude-3-5-sonnet"
+  },
+  {
+    "Model": "Gpt-4o-Mini",
+    "Pass@1": 0.0,
+    "Pass@5": 0.0,
+    "Average Points": 1.8044943820224721,
+    "URL": "https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/"
+  },
+  {
+    "Model": "DeepSeek-V3-03-24",
+    "Pass@1": 0.008988764044943821,
+    "Pass@5": 0.011235955056179775,
+    "Average Points": 3.7053370786516853,
+    "URL": "https://api-docs.deepseek.com/news/news250325"
+  },
+  {
+    "Model": "O4-Mini(High)",
+    "Pass@1": 0.06477272727272727,
+    "Pass@5": 0.14772727272727273,
+    "Average Points": 10.62360984848485,
+    "URL": "https://platform.openai.com/docs/models/o4-mini"
+  },
+  {
+    "Model": "DeepSeek-R1-01-20",
+    "Pass@1": 0.015730337078651683,
+    "Pass@5": 0.056179775280898875,
+    "Average Points": 5.130674157303371,
+    "URL": "https://api-docs.deepseek.com/news/news250120"
+  }
+]

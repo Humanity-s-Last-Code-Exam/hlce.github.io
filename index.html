@@ -83,6 +83,36 @@
           font-size: small;
         }
       }
+
+        /* ---------- Author & Affiliation ---------- */
+        .paper-meta {
+          font-size: 1.05rem;       /* 默认字号（≈17 px） */
+          line-height: 1.4;
+        }
+
+        .author-line span,
+        .affil-line span {
+          white-space: nowrap;      /* 避免名字/单位被拆行 */
+        }
+
+        .author-line sup,
+        .affil-line sup {
+          font-size: 0.65em;        /* 上标略小 */
+          vertical-align: super;
+        }
+
+        .author-line { font-weight: 600; }   /* 姓名稍加粗 */
+        .affil-line { font-weight: 400; }
+
+        @media (min-width: 1400px) {          /* 超宽屏略放大 */
+          .paper-meta { font-size: 1.15rem; }
+        }
+
+        @media (max-width: 768px) {           /* 移动端自适应缩放 */
+          .paper-meta { font-size: 3.5vw; }
+          .author-line,
+          .affil-line { line-height: 1.3; }
+        }
     </style>
   </head>
 
@@ -96,6 +126,26 @@
       <h3 class="fw-light text-nowrap">
         <small id="warning">Can Advanced LLMs Conquer Human's Hardest Code Competition?<br /></small>
       </h3>
+
+      <div class="paper-meta text-center my-3">
+        <!-- 作者行 -->
+        <div class="author-line">
+          <span>Xiangyang Li<sup>*</sup></span>,
+          <span>Xiaopeng Li<sup>*</sup></span>,
+          <span>Kuicai Dong<sup></sup></span>,
+          <span>Quanhu Zhang<sup></sup></span>,
+          <span>Rongju Ruan<sup></sup></span>,
+          <span>Xinyi Dai<sup></sup></span>,
+          <span>Yasheng Wang<sup></sup></span>,
+          <span>Ruiming Tang<sup></sup></span>
+
+        </div>
+
+        <!-- 单位行 -->
+        <div class="affil-line text-muted mt-1">
+          <span><sup></sup> Huawei Noah's Ark Lab</span>,
+        </div>
+      </div>
 
       <div class="d-flex flex-row justify-content-center gap-3">
         <a href="https://github.com/Humanity-s-Last-Code-Exam/HLCE">
@@ -286,8 +336,11 @@
           ]);
 
           const aggMap = new Map();
-          const pass1Candidates = ['pass@1', 'pass1', 'pass@1 (%)'];
-          const pass5Candidates = ['pass@5', 'pass5', 'pass@5 (%)'];
+          // const pass1Candidates = ['Pass@1', 'pass1', 'pass@1 (%)'];
+          // const pass5Candidates = ['pass@5', 'pass5', 'pass@5 (%)'];
+
+          pass1Candidates = ['Pass@1', 'pass@1', 'pass1', 'Pass@1 (%)', 'pass@1 (%)'];
+          pass5Candidates = ['Pass@5', 'pass@5', 'pass5', 'Pass@5 (%)', 'pass@5 (%)'];
 
           const accumulate = (rows) => {
             rows.forEach((row) => {
@@ -314,7 +367,7 @@
             URL: e.URL,
           }));
 
-          avgRows.sort((a, b) => safeNum(b['pass@1']) - safeNum(a['pass@1']));
+          avgRows.sort((a, b) => safeNum(b['Pass@1']) - safeNum(a['Pass@1']));
           tableKeys = ['Model', 'Pass@1', 'Pass@5'];
           tableData = avgRows;
           sortState.clear();
